@@ -9,8 +9,8 @@ namespace Core.DataAccess.Abstract
 {
     public interface IRepository<TEntity>
     {
-        Task<TEntity> GetById(int id);
-        Task<IEnumerable<TEntity>> GetByFilter(Func<TEntity, bool> filter);
+        Task<TEntity> GetByIdAsync(int id);
+        Task<IEnumerable<TEntity>> GetByFilterAsync(Func<TEntity, bool> filter);
         Task<IEnumerable<TEntity>> GetAllAsync();       
         Task<int> AddAsync(TEntity entity);
         Task<int> UpdateAsync(TEntity entity);

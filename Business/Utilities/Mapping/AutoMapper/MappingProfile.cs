@@ -1,10 +1,12 @@
 ﻿using AutoMapper;
-using Business.Managers.Account.Commands.Add;
-using Business.Managers.Account.Commands.Update;
+using Business.Managers.Auth.Commands.Register;
+using Business.Managers.User.Commands.UpdateUser;
 using Core.Entities.Concrete;
+using Core.Extensions;
 using Core.Utilities.Hashing;
 using Core.Utilities.Security.Abstract;
 using Core.Utilities.Security.Jwt;
+using Entities.Concrete;
 using Entities.Dtos;
 using System;
 using System.Collections.Generic;
@@ -17,32 +19,39 @@ namespace Business.Utilities.Mapping.AutoMapper
 
         public MappingProfile()
         {
-            CreateMap<User, UserViewDto>().ReverseMap();
-            CreateMap<User,UserLoginViewDto>();
+
+            CreateMap<User,LoginInfoDto>();
                
-            CreateMap<UserAddCommand, User>()
+            CreateMap<RegisterCommand,User>()
                 .ForMember(
-                user => user.Username,
+                dest => dest.Username,
                 opt => opt.MapFrom(src => src.Username.ToLower())
                 )
                 .ForMember(
-                user => user.PasswordHash,
+                dest => dest.PasswordHash,
                 opt => opt.MapFrom(src => HashingUtil.GetPasswordHash())
                 )
                 .ForMember(
-                user => user.PasswordSalt,
+                dest => dest.PasswordSalt,
                 opt => opt.MapFrom(src => HashingUtil.GetPasswordSalt())
                 );
 
 
-            CreateMap<UserUpdateCommand, User>().ForMember(
-                user => user.PasswordHash,
+            CreateMap<UpdateUserCommand, User>().ForMember(
+                dest => dest.PasswordHash,
                 opt => opt.MapFrom(src => HashingUtil.GetPasswordHash())
                 )
                 .ForMember(
-                user => user.PasswordSalt,
+                dest => dest.PasswordSalt,
                 opt => opt.MapFrom(src => HashingUtil.GetPasswordSalt())
+                )
+                .ForMember(
+                dest => dest.Age,
+                opt => opt.MapFrom(src => src.DateOfBirth != null ? src.DateOfBirth.CalculateAge() : 0)
                 );
+
+            CreateMap<User,UserDto>();
+            CreateMap<Photo,PhotoDto>();
         }
     }
 }

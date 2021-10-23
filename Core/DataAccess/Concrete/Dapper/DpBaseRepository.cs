@@ -40,12 +40,12 @@ namespace Core.DataAccess.Concrete
             return await _dbConnection.QueryAsync<TEntity>($@"select * from ""{entityName}s"" ");
         }
 
-        public async Task<IEnumerable<TEntity>> GetByFilter(Func<TEntity, bool> filter)
+        public async Task<IEnumerable<TEntity>> GetByFilterAsync(Func<TEntity, bool> filter)
         {
             return await Task.FromResult(GetAllAsync().Result.Where(filter));
         }
 
-        public async Task<TEntity> GetById(int id)
+        public async Task<TEntity> GetByIdAsync(int id)
         {
             return await _dbConnection.QuerySingleOrDefaultAsync<TEntity>($@"select * from ""{entityName}s"" where ""Id"" = {id}");
         }

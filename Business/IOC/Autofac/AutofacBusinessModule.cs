@@ -1,6 +1,6 @@
 ﻿using Autofac;
 using AutoMapper;
-using Business.Managers.Account.Commands.Add;
+using Business.Managers.Auth.Commands.Register;
 using Business.Utilities.Mapping.AutoMapper;
 using Business.Utilities.Validation.FluentValidation.User;
 using Core.DataAccess.Abstract;
@@ -33,6 +33,7 @@ namespace Business.IOC.Autofac
             builder.Register(context => new MapperConfiguration(cfg =>
             {
                 cfg.AddProfile<MappingProfile>();
+                cfg.AllowNullCollections = true;
             }
              )).AsSelf().SingleInstance();
 
@@ -47,7 +48,7 @@ namespace Business.IOC.Autofac
 
             builder.RegisterType<DapperDbContext>().As<IDbContext>();
             builder.Register<IDbConnection>(connection => new NpgsqlConnection(_Configuration.GetConnectionString("DbFellowshipConnection")));
-            builder.RegisterType<UserAddValidator>().As<IValidator<UserAddCommand>>();
+            builder.RegisterType<UserRegisterValidator>().As<IValidator<RegisterCommand>>();
             builder.RegisterType<JwtHelper>().As<ITokenHelper>();
         }
 

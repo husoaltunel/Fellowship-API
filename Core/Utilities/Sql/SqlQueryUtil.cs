@@ -12,13 +12,13 @@ namespace Core.Utilities.Sql
             var setQueryList = new List<string>();
             foreach (var property in GetEntityProperties(entity))
             {
-                if (property.Name != "Id")
+                if (property.Name != "Id" && property.Name != "Username")
                 {
                     setQueryList.Add($@" ""{property.Name}"" = @{property.Name}");
                 }                
             }
             var setQuery  = String.Join(",", setQueryList);
-            var updateQuery = $@"update ""{entityName}s"" set {setQuery} where ""Id"" =@id";
+            var updateQuery = $@"update ""{entityName}s"" set {setQuery} where ""Username"" =@Username";
             return updateQuery.ToString();
         }
         public static string GenerateGenericInsertQuery(TEntity entity, string entityName)
