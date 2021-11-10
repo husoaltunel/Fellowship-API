@@ -5,6 +5,8 @@ using Business.Utilities.Mapping.AutoMapper;
 using Business.Utilities.Validation.FluentValidation.User;
 using Core.DataAccess.Abstract;
 using Core.DataAccess.Concrete;
+using Core.Utilities.Hashing;
+using Core.Utilities.Hashing.Abstract;
 using Core.Utilities.Security;
 using Core.Utilities.Security.Abstract;
 using Core.Utilities.Security.Jwt;
@@ -33,7 +35,6 @@ namespace Business.IOC.Autofac
             builder.Register(context => new MapperConfiguration(cfg =>
             {
                 cfg.AddProfile<MappingProfile>();
-                cfg.AllowNullCollections = true;
             }
              )).AsSelf().SingleInstance();
 
@@ -50,6 +51,7 @@ namespace Business.IOC.Autofac
             builder.Register<IDbConnection>(connection => new NpgsqlConnection(_Configuration.GetConnectionString("DbFellowshipConnection")));
             builder.RegisterType<UserRegisterValidator>().As<IValidator<RegisterCommand>>();
             builder.RegisterType<JwtHelper>().As<ITokenHelper>();
+            builder.RegisterType<HashingHelper>().As<IHashingHelper>();
         }
 
     }

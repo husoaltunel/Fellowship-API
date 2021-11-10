@@ -1,15 +1,16 @@
-﻿using System;
+﻿using Core.Utilities.Hashing.Abstract;
+using System;
 using System.Collections.Generic;
 using System.Security.Cryptography;
 using System.Text;
 
 namespace Core.Utilities.Hashing
 {
-    public static class HashingUtil
+    public class HashingHelper : IHashingHelper
     {
-        private static byte[] _passwordHash;
-        private static byte[] _passwordSalt;
-        public static void GeneratePasswordHashAndSalt(string password)
+        private byte[] _passwordHash;
+        private byte[] _passwordSalt;
+        public void GeneratePasswordHashAndSalt(string password)
         {
             using (var hmac = new HMACSHA512())
             {
@@ -17,15 +18,15 @@ namespace Core.Utilities.Hashing
                 _passwordSalt = hmac.Key;
             }
         }
-        public static byte[] GetPasswordHash()
+        public byte[] GetPasswordHash()
         {
             return _passwordHash;
         }
-        public static byte[] GetPasswordSalt()
+        public byte[] GetPasswordSalt()
         {
             return _passwordSalt;
         }
-        public static bool VerifyPasswordHash(string password, byte[] passwordHash, byte[] passwordSalt)
+        public bool VerifyPasswordHash(string password, byte[] passwordHash, byte[] passwordSalt)
         {
             using (var hmac = new HMACSHA512())
             {
@@ -34,7 +35,7 @@ namespace Core.Utilities.Hashing
                 return CheckPasswordHashEqual(passwordHash);
             }
         }
-        private static bool CheckPasswordHashEqual(byte[] passwordHash)
+        private bool CheckPasswordHashEqual(byte[] passwordHash)
         {
             for (int i = 0; i < passwordHash.Length; i++)
             {

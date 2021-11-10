@@ -14,15 +14,15 @@ using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 
-namespace Business.Managers.User.Queries.GetUserByUserNameForLogin
+namespace Business.Managers.User.Queries.GetUserFullInfoByUserName
 {
-    public class Handler : BaseConnection, IRequestHandler<GetUserByUserNameForLoginQuery, IDataResult<Core.Entities.Concrete.User>>
+    public class Handler : BaseConnection, IRequestHandler<GetUserFullInfoByUserNameQuery, IDataResult<Core.Entities.Concrete.User>>
     {
         public Handler(IDbConnection connection)
         {
             Connection = connection;
         }
-        public async Task<IDataResult<Core.Entities.Concrete.User>> Handle(GetUserByUserNameForLoginQuery request, CancellationToken cancellationToken)
+        public async Task<IDataResult<Core.Entities.Concrete.User>> Handle(GetUserFullInfoByUserNameQuery request, CancellationToken cancellationToken)
         {
             using (var unitOfWork = UnitOfWorkUtil.GetUnitOfWork(Connection))
             {

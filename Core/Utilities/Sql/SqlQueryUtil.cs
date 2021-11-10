@@ -12,13 +12,13 @@ namespace Core.Utilities.Sql
             var setQueryList = new List<string>();
             foreach (var property in GetEntityProperties(entity))
             {
-                if (property.Name != "Id" && property.Name != "Username")
+                if (property.Name != "Id")
                 {
                     setQueryList.Add($@" ""{property.Name}"" = @{property.Name}");
                 }                
             }
             var setQuery  = String.Join(",", setQueryList);
-            var updateQuery = $@"update ""{entityName}s"" set {setQuery} where ""Username"" =@Username";
+            var updateQuery = $@"update ""{entityName}s"" set {setQuery} where ""Id"" =@Id";
             return updateQuery.ToString();
         }
         public static string GenerateGenericInsertQuery(TEntity entity, string entityName)
@@ -35,12 +35,12 @@ namespace Core.Utilities.Sql
             var insertQuery = $@"insert into  ""{entityName}s""({GetEntityPropertiesString(entity)}) values({valuesQueryString}) ";
             return insertQuery.ToString();
         }
-        public static PropertyInfo[] GetEntityProperties(TEntity entity)
+        private static PropertyInfo[] GetEntityProperties(TEntity entity)
         {
             var entityProperties = entity.GetType().GetProperties();
             return entityProperties;
         }
-        public static string GetEntityPropertiesString(TEntity entity)
+        private static string GetEntityPropertiesString(TEntity entity)
         {
             var entityProperties = GetEntityProperties(entity);
             List<string> entityPropertiesList = new List<string>();
@@ -54,7 +54,7 @@ namespace Core.Utilities.Sql
             var entityPropertiesToString = String.Join(",", entityPropertiesList);
             return entityPropertiesToString;
         }
-        public static string GetEntityPropertyValuesString(TEntity entity)
+        private static string GetEntityPropertyValuesString(TEntity entity)
         {
             var entityProperties = GetEntityProperties(entity);
             List<string> entityPropertyValueList = new List<string>();

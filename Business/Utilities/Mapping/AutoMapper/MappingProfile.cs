@@ -19,39 +19,25 @@ namespace Business.Utilities.Mapping.AutoMapper
 
         public MappingProfile()
         {
-
-            CreateMap<User,LoginInfoDto>();
-               
-            CreateMap<RegisterCommand,User>()
-                .ForMember(
-                dest => dest.Username,
-                opt => opt.MapFrom(src => src.Username.ToLower())
+            CreateMap<RegisterDto, User>().ForMember(
+                dest=>dest.Created,
+                opt => opt.MapFrom(src=> DateTime.Now)
                 )
                 .ForMember(
-                dest => dest.PasswordHash,
-                opt => opt.MapFrom(src => HashingUtil.GetPasswordHash())
-                )
-                .ForMember(
-                dest => dest.PasswordSalt,
-                opt => opt.MapFrom(src => HashingUtil.GetPasswordSalt())
+                dest => dest.LastActive,
+                opt => opt.MapFrom(src => DateTime.Now)
                 );
+            CreateMap<User, LoginInfoDto>();
 
 
-            CreateMap<UpdateUserCommand, User>().ForMember(
-                dest => dest.PasswordHash,
-                opt => opt.MapFrom(src => HashingUtil.GetPasswordHash())
-                )
-                .ForMember(
-                dest => dest.PasswordSalt,
-                opt => opt.MapFrom(src => HashingUtil.GetPasswordSalt())
-                )
-                .ForMember(
+
+            CreateMap<UpdateUserDto, User>().ForMember(
                 dest => dest.Age,
-                opt => opt.MapFrom(src => src.DateOfBirth != null ? src.DateOfBirth.CalculateAge() : 0)
+                opt => opt.MapFrom((src,dest) => src.DateOfBirth != null ? src.DateOfBirth.CalculateAge() : dest.Age )
                 );
 
-            CreateMap<User,UserDto>();
-            CreateMap<Photo,PhotoDto>();
+            CreateMap<User, UserDto>();
+            CreateMap<Photo, PhotoDto>();
         }
     }
 }

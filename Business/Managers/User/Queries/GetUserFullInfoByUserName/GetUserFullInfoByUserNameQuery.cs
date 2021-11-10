@@ -6,9 +6,9 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace Business.Managers.User.Queries.GetUserByUserNameForLogin
+namespace Business.Managers.User.Queries.GetUserFullInfoByUserName
 {
-    public class GetUserByUserNameForLoginQuery : GetUserByUsernameDto, IRequest<IDataResult<Core.Entities.Concrete.User>>
+    public class GetUserFullInfoByUserNameQuery : GetUserByUsernameDto, IRequest<IDataResult<Core.Entities.Concrete.User>>
     {
         
     }

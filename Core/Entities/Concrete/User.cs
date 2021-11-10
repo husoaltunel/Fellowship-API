@@ -25,11 +25,6 @@ namespace Core.Entities.Concrete
         public string LookingFor { get;set;}
         public string Interests { get;set;}
         public int? AlbumId { get;set;}
-        public User()
-        {
-            Created = DateTime.Now;
-            LastActive = DateTime.Now;
-            if(DateOfBirth != null) Age = DateOfBirth.CalculateAge();
-        }
+
     }
 }
