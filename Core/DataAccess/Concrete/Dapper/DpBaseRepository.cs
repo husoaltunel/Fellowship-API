@@ -14,7 +14,7 @@ namespace Core.DataAccess.Concrete
 {
     public class DpBaseRepository<TEntity> : IRepository<TEntity> where TEntity : class, IEntity, new()
     {
-        private readonly IDbConnection _dbConnection;
+        protected readonly IDbConnection _dbConnection;
         private readonly IDbTransaction _dbTransaction;
         private string entityName;
         public DpBaseRepository(IDbConnection dbConnection, IDbTransaction transaction)
@@ -35,7 +35,7 @@ namespace Core.DataAccess.Concrete
         }
 
 
-        public async Task<IEnumerable<TEntity>> GetAllAsync()
+        public async Task<IEnumerable<TEntity>> GetAllAsync()   
         {
             return await _dbConnection.QueryAsync<TEntity>($@"select * from ""{entityName}s"" ");
         }

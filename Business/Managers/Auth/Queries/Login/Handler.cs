@@ -2,7 +2,6 @@
 using Business.Concrete;
 using Business.Constants;
 using Business.Managers.User.Queries.GetUserByUserName;
-using Business.Managers.User.Queries.GetUserFullInfoByUserName;
 using Core.Entities.Concrete;
 using Core.Utilities.Hashing;
 using Core.Utilities.Hashing.Abstract;
@@ -41,8 +40,8 @@ namespace Business.Managers.Auth.Queries.Login
         {
             using (var unitOfWork = UnitOfWorkUtil.GetUnitOfWork(Connection))
             {
-                var result = await _mediator.Send(new GetUserFullInfoByUserNameQuery(){Username = request.Username });
-                var user = result.Data;
+                var result = await unitOfWork.DbContext.Users.GetByFilterAsync(user => user.Username == request.Username);
+                var user = result.FirstOrDefault();
                 if (!ResultUtil<Core.Entities.Concrete.User>.IsDataExist(user))
                 {
                     return new ErrorDataResult<LoginInfoDto>(message: AuthMessages.UserNotFound);

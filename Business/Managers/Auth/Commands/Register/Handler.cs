@@ -2,7 +2,6 @@
 using Business.Concrete;
 using Business.Constants;
 using Business.Managers.User.Queries.GetUserByUserName;
-using Core.Utilities.Hashing;
 using Core.Utilities.Hashing.Abstract;
 using Core.Utilities.Results;
 using Core.Utilities.Results.Abstract;
@@ -10,8 +9,6 @@ using Core.Utilities.Results.Concrete;
 using DataAccess.Utilities.UnitOfWork;
 using Entities.Dtos;
 using MediatR;
-using System;
-using System.Collections.Generic;
 using System.Data;
 using System.Text;
 using System.Threading;

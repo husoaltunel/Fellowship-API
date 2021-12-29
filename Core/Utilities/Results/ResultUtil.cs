@@ -14,6 +14,14 @@ namespace Core.Utilities.Results
             }
             return false;
         }
+        public static bool IsDataExist(int result)
+        {
+            if (result != 0)
+            {
+                return true;
+            }
+            return false;
+        }
         public static bool IsResultSuccees(int result)
         {
             if (result != 0)

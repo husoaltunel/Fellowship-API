@@ -20,7 +20,7 @@ namespace DataAccess.Concrete.Dapper
         }
        
         public UserRepository Users => new UserRepository(DbConnection,DbTransaction);
-
+        public PhotoRepository Photos => new PhotoRepository(DbConnection,DbTransaction);
        
     }
 }

@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Claims;
 using System.Threading.Tasks;
 using Business.Managers.Auth.Commands.Register;
 using Business.Managers.Auth.Queries.Login;
@@ -42,6 +43,12 @@ namespace API.Controllers
             return Ok();
         }
 
-        
+        [ApiExplorerSettings(IgnoreApi = true)]
+        public string GetUserIdFromToken()
+        {
+            return User.Claims.Where(claim => claim.Type == ClaimTypes.NameIdentifier).FirstOrDefault().Value.ToString();
+        }
+
+
     }
 }

@@ -22,7 +22,7 @@ namespace DataAccess.Concrete.Dapper
 
         public void Dispose()
         {
-
+            
         }
     }
 }

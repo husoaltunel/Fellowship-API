@@ -10,28 +10,31 @@ using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Claims;
 using System.Threading.Tasks;
 
 namespace API.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    
+   
     public class UsersController : ControllerBase
     {
         private readonly IMediator _mediator ;
         public UsersController(IMediator mediator)
         {
+            
             _mediator = mediator;
         }
 
-        [HttpGet("get-users")]
+        [HttpGet]
         public async Task<IActionResult> GetUsersAsync()
         {
+            
             return Ok(await _mediator.Send(new GetUsersQuery()));
         }
 
-        [HttpGet("get-user-by-id/{id}")]
+        [HttpGet("{id}")]
         public async Task<IActionResult> GetUserByIdAsync(int id)
         {
             return Ok(await _mediator.Send(new GetUserByIdQuery() { Id = id }));
@@ -43,16 +46,17 @@ namespace API.Controllers
             return Ok(await _mediator.Send(new GetUserByUserNameQuery(){Username = username}));
         }
 
-        [HttpPost("update-user")]
+        [HttpPut]
         public async Task<IActionResult> UpdateUserAsync(UpdateUserCommand model)
         {
             return Ok(await _mediator.Send(model));
         }
 
-        [HttpPost("delete-user")]
+        [HttpDelete]
         public async Task<IActionResult> DeleteUserAsync(int id)
         {
             return Ok(await _mediator.Send(new DeleteUserCommand(){ Id = id }));
         }
+        
     }
 }

@@ -1,6 +1,5 @@
 ﻿using AutoMapper;
 using Business.Concrete;
-using Business.Managers.User.Queries.GetUserFullInfoByUserName;
 using Core.Extensions;
 using Core.Utilities.Hashing;
 using Core.Utilities.Hashing.Abstract;
@@ -12,6 +11,7 @@ using MediatR;
 using System;
 using System.Collections.Generic;
 using System.Data;
+using System.Linq;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
@@ -34,22 +34,23 @@ namespace Business.Managers.User.Commands.UpdateUser
         {
             using (var unitOfWork = UnitOfWorkUtil.GetUnitOfWork(Connection))
             {
-                var user = await _mediator.Send(new GetUserFullInfoByUserNameQuery() { Username = request.Username });
-                var updatedUser = _mapper.Map(request, user.Data);
+                var result = await unitOfWork.DbContext.Users.GetByFilterAsync(user => user.Username == request.Username);
+                var user = result.FirstOrDefault();
+                var updatedUser = _mapper.Map(request,user );
 
                 if (!String.IsNullOrEmpty(request.Password))
                 {
                     _hashingHelper.GeneratePasswordHashAndSalt(request.Password);
-                    user.Data.PasswordHash = _hashingHelper.GetPasswordHash();
-                    user.Data.PasswordSalt = _hashingHelper.GetPasswordSalt();
+                    user.PasswordHash = _hashingHelper.GetPasswordHash();
+                    user.PasswordSalt = _hashingHelper.GetPasswordSalt();
                 }
-                var result = await unitOfWork.DbContext.Users.UpdateAsync(updatedUser);
+                var updateResult = await unitOfWork.DbContext.Users.UpdateAsync(updatedUser);
 
-                if (ResultUtil<int>.IsResultSuccees(result))
+                if (ResultUtil<int>.IsResultSuccees(updateResult))
                 {
-                    return new SuccessDataResult<int>(result);
+                    return new SuccessDataResult<int>(updateResult);
                 }
-                return new ErrorDataResult<int>(result);
+                return new ErrorDataResult<int>(updateResult);
             }
         }
     }
