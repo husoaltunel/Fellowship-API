@@ -1,9 +1,9 @@
-﻿using Core.Utilities.Results.Abstract;
+﻿using Business.Utilities.Results.Abstract;
 using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace Core.Utilities.Results.Concrete
+namespace Business.Utilities.Results.Concrete
 {
     public class SuccessResult : Result,IResult
     {     

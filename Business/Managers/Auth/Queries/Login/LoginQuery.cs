@@ -1,4 +1,4 @@
-﻿using Core.Utilities.Results.Abstract;
+﻿using Business.Utilities.Results.Abstract;
 using Entities.Dtos;
 using MediatR;
 using System;

@@ -1,10 +1,10 @@
-﻿using Core.Entities.Concrete;
+﻿using Business.Entities.Concrete;
 using System;
 using System.Collections.Generic;
 using System.Security.Claims;
 using System.Text;
 
-namespace Core.Utilities.Security.Helpers
+namespace Business.Utilities.Security.Helpers
 {
     public class ClaimsHelper
     {

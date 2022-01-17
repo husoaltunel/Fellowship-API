@@ -1,4 +1,4 @@
-﻿using Core.Utilities.Security;
+﻿using Business.Utilities.Security;
 using System;
 using System.Collections.Generic;
 using System.Text;

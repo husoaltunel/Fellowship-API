@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Reflection;
 using System.Text;
 
-namespace Core.Utilities.Sql
+namespace Business.Utilities.Sql
 {
     public static class SqlQueryUtil<TEntity>
     {
@@ -32,7 +32,7 @@ namespace Core.Utilities.Sql
                 }
             }
             var valuesQueryString = String.Join(",",propertyNameList);
-            var insertQuery = $@"insert into  ""{entityName}s""({GetEntityPropertiesString(entity)}) values({valuesQueryString}) ";
+            var insertQuery = $@"insert into  ""{entityName}s""({GetEntityPropertiesString(entity)}) values({valuesQueryString}) returning ""Id"" ";
             return insertQuery.ToString();
         }
         private static PropertyInfo[] GetEntityProperties(TEntity entity)

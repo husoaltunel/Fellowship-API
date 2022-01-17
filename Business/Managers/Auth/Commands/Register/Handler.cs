@@ -1,11 +1,11 @@
 ﻿using AutoMapper;
-using Business.Concrete;
 using Business.Constants;
-using Business.Managers.User.Queries.GetUserByUserName;
-using Core.Utilities.Hashing.Abstract;
-using Core.Utilities.Results;
-using Core.Utilities.Results.Abstract;
-using Core.Utilities.Results.Concrete;
+using Business.Managers.Users.Queries.GetUserByUserName;
+using Business.Entities.Concrete;
+using Business.Utilities.Hashing.Abstract;
+using Business.Utilities.Results;
+using Business.Utilities.Results.Abstract;
+using Business.Utilities.Results.Concrete;
 using DataAccess.Utilities.UnitOfWork;
 using Entities.Dtos;
 using MediatR;
@@ -13,6 +13,7 @@ using System.Data;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
+using Core.DataAccess.Concrete;
 
 namespace Business.Managers.Auth.Commands.Register
 {
@@ -38,18 +39,19 @@ namespace Business.Managers.Auth.Commands.Register
                     return new ErrorDataResult<UserDto>(message: AuthMessages.UserExist);
                 }
                 _hashingHelper.GeneratePasswordHashAndSalt(request.Password);
-                var newUser = new Core.Entities.Concrete.User()
+                var newUser = new User()
                 {
                     PasswordHash = _hashingHelper.GetPasswordHash(),
                     PasswordSalt = _hashingHelper.GetPasswordSalt()
                 };
                 newUser = _mapper.Map(request,newUser);
                 var result = await unitOfWork.DbContext.Users.AddAsync(newUser);
-                if (ResultUtil<int>.IsResultSuccees(result))
+                if (!ResultUtil<int>.IsResultSuccees(result))
                 {
-                    return await _mediator.Send(new GetUserByUserNameQuery() { Username = request.Username });
+                    return new ErrorDataResult<UserDto>();
+                   
                 }
-                return new ErrorDataResult<UserDto>();
+                return await _mediator.Send(new GetUserByUserNameQuery() { Username = request.Username });
             }
 
         }

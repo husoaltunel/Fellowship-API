@@ -1,5 +1,4 @@
-﻿using Core.DataAccess.Abstract;
-using DataAccess.Concrete.Dapper;
+﻿using DataAccess.Concrete.Dapper;
 using System;
 using System.Collections.Generic;
 using System.Data;

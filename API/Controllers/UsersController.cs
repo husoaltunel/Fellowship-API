@@ -1,8 +1,8 @@
-﻿using Business.Managers.User.Commands.DeleteUser;
-using Business.Managers.User.Commands.UpdateUser;
-using Business.Managers.User.Queries.GetUserById;
-using Business.Managers.User.Queries.GetUserByUserName;
-using Business.Managers.User.Queries.GetUsers;
+﻿using Business.Managers.Users.Commands.DeleteUser;
+using Business.Managers.Users.Commands.UpdateUser;
+using Business.Managers.Users.Queries.GetUserById;
+using Business.Managers.Users.Queries.GetUserByUserName;
+using Business.Managers.Users.Queries.GetUsers;
 using MediatR;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;

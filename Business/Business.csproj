@@ -20,10 +20,9 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Managers\AlbumPhoto\Commands\InsertPhotoToAlbum\" />
-    <Folder Include="Managers\AlbumPhoto\Queries\" />
-    <Folder Include="Managers\Photo\Commands\SavePhotosToFolder\" />
-    <Folder Include="Managers\User\Queries\GetUserAlbumId\" />
+    <Folder Include="Managers\AlbumPhotos\Queries\" />
+    <Folder Include="Managers\Albums\Queries\" />
+    <Folder Include="Managers\Users\Queries\GetUserAlbumId\" />
   </ItemGroup>
 
 </Project>

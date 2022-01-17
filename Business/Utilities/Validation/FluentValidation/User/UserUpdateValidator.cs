@@ -1,4 +1,4 @@
-﻿using Business.Managers.User.Commands.UpdateUser;
+﻿using Business.Managers.Users.Commands.UpdateUser;
 using FluentValidation;
 using System;
 using System.Collections.Generic;

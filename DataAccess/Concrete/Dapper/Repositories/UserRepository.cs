@@ -1,5 +1,5 @@
-﻿using Core.DataAccess.Concrete;
-using Core.Entities.Concrete;
+﻿using Business.Entities.Concrete;
+using Core.DataAccess.Concrete.Dapper;
 using DataAccess.Abstract;
 using System;
 using System.Collections.Generic;

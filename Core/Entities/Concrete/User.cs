@@ -1,10 +1,10 @@
-﻿using Core.Entities.Abstract;
-using Core.Extensions;
+﻿using Business.Entities.Abstract;
+using Business.Extensions;
 using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace Core.Entities.Concrete
+namespace Business.Entities.Concrete
 {
     public class User : BaseEntity , IEntity
     {
@@ -23,7 +23,7 @@ namespace Core.Entities.Concrete
         public DateTime LastActive { get;set;}
         public string LookingFor { get;set;}
         public string Interests { get;set;}
-        public int? AlbumId { get;set;}
+        public int AlbumId { get;set;}
 
     }
 }

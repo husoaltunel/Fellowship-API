@@ -3,13 +3,11 @@ using AutoMapper;
 using Business.Managers.Auth.Commands.Register;
 using Business.Utilities.Mapping.AutoMapper;
 using Business.Utilities.Validation.FluentValidation.User;
-using Core.DataAccess.Abstract;
-using Core.DataAccess.Concrete;
-using Core.Utilities.Hashing;
-using Core.Utilities.Hashing.Abstract;
-using Core.Utilities.Security;
-using Core.Utilities.Security.Abstract;
-using Core.Utilities.Security.Jwt;
+using Business.Utilities.Hashing;
+using Business.Utilities.Hashing.Abstract;
+using Business.Utilities.Security;
+using Business.Utilities.Security.Abstract;
+using Business.Utilities.Security.Jwt;
 using DataAccess.Abstract;
 using DataAccess.Concrete.Dapper;
 using FluentValidation;
@@ -47,7 +45,6 @@ namespace Business.IOC.Autofac
             .As<IMapper>()
             .InstancePerLifetimeScope();
 
-            builder.RegisterType<DapperDbContext>().As<IDbContext>();
             builder.Register<IDbConnection>(connection => new NpgsqlConnection(_Configuration.GetConnectionString("DbFellowshipConnection")));
             builder.RegisterType<UserRegisterValidator>().As<IValidator<RegisterCommand>>();
             builder.RegisterType<JwtHelper>().As<ITokenHelper>();

@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace Core.Utilities.Results
+namespace Business.Utilities.Results
 {
     public class ResultUtil<TEntity>
     {

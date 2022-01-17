@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace Core.Utilities.Hashing.Abstract
+namespace Business.Utilities.Hashing.Abstract
 {
     public interface IHashingHelper
     {

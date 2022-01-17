@@ -1,4 +1,4 @@
-﻿using Core.DataAccess.Concrete;
+﻿using Core.DataAccess.Concrete.Dapper;
 using Dapper;
 using DataAccess.Abstract;
 using Entities.Concrete;
@@ -20,11 +20,11 @@ namespace DataAccess.Concrete.Dapper.Repositories
         public async Task<IEnumerable<Photo>> GetPhotosByUsernameAsync(string username)
         {
 
-            return await _dbConnection.QueryAsync<Photo>("select * from get_photos_by_username(@username)", new { username = username });
+            return await Connection.QueryAsync<Photo>("select * from get_photos_by_username(@username)", new { username = username },transaction: Transaction);
         }
         public async Task<Photo> GetProfilePhotoByUsernameAsync(string username)
         {
-            return await _dbConnection.QuerySingleOrDefaultAsync<Photo>("select * from get_profile_photo_by_username(@username)",new {username = username });
+            return await Connection.QuerySingleOrDefaultAsync<Photo>("select * from get_profile_photo_by_username(@username)",new {username = username }, transaction: Transaction);
         }
         
     }

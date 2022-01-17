@@ -3,7 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace Core.Utilities.Security.Helpers
+namespace Business.Utilities.Security.Helpers
 {
     public class SigningCredentialsHelper
     {

@@ -5,8 +5,11 @@ using System.Text;
 
 namespace Core.DataAccess.Abstract
 {
-    public interface IUnitOfWork : IDbContext
+    public interface IUnitOfWork : IConnection
     {
-       
+        public void OpenConnection();
+        public void BeginTransaction();
+        public void Commit();
+        public void RollBack();
     }
 }

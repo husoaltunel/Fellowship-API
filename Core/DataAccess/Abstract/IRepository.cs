@@ -1,5 +1,4 @@
-﻿using Core.Utilities.Results.Abstract;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq.Expressions;
 using System.Text;
@@ -11,7 +10,7 @@ namespace Core.DataAccess.Abstract
     {
         Task<TEntity> GetByIdAsync(int id);
         Task<IEnumerable<TEntity>> GetByFilterAsync(Func<TEntity, bool> filter);
-        Task<IEnumerable<TEntity>> GetAllAsync();       
+        Task<IEnumerable<TEntity>> GetAllAsync();
         Task<int> AddAsync(TEntity entity);
         Task<int> UpdateAsync(TEntity entity);
         Task<int> DeleteAsync(int id);

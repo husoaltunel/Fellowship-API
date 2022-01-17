@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace Core.Utilities.Security
+namespace Business.Utilities.Security
 {
     public class TokenOptions
     {

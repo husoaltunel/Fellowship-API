@@ -1,10 +1,10 @@
-﻿using Core.Entities.Concrete;
-using Core.Utilities.Security.Jwt;
+﻿using Business.Entities.Concrete;
+using Business.Utilities.Security.Jwt;
 using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace Core.Utilities.Security.Abstract
+namespace Business.Utilities.Security.Abstract
 {
     public interface ITokenHelper
     {

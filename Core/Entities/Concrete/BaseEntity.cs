@@ -1,9 +1,9 @@
-﻿using Core.Entities.Abstract;
+﻿using Business.Entities.Abstract;
 using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace Core.Entities.Concrete
+namespace Business.Entities.Concrete
 {
     public class BaseEntity : IEntity
     {

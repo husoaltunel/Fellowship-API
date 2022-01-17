@@ -1,11 +1,11 @@
 ﻿using AutoMapper;
 using Business.Managers.Auth.Commands.Register;
-using Business.Managers.User.Commands.UpdateUser;
-using Core.Entities.Concrete;
-using Core.Extensions;
-using Core.Utilities.Hashing;
-using Core.Utilities.Security.Abstract;
-using Core.Utilities.Security.Jwt;
+using Business.Managers.Users.Commands.UpdateUser;
+using Business.Entities.Concrete;
+using Business.Extensions;
+using Business.Utilities.Hashing;
+using Business.Utilities.Security.Abstract;
+using Business.Utilities.Security.Jwt;
 using Entities.Concrete;
 using Entities.Dtos;
 using System;
@@ -37,7 +37,10 @@ namespace Business.Utilities.Mapping.AutoMapper
                 );
 
             CreateMap<User, UserDto>();
-            CreateMap<Photo, PhotoDto>();
+            CreateMap<PhotoDto,Photo>().ReverseMap();
+            CreateMap<AlbumPhotoDto,AlbumPhoto>().ReverseMap();
+            CreateMap<AlbumDto,Album>().ReverseMap();
+
         }
     }
 }

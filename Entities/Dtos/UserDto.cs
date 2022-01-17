@@ -1,4 +1,4 @@
-﻿using Core.Entities.Dtos;
+﻿using Business.Entities.Dtos;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -9,7 +9,6 @@ namespace Entities.Dtos
     {
         public string Username { get; set; }
         public string Email { get; set; }
-        public string ImageUrl { get;set;}
         public DateTime? DateOfBirth { get; set; }
         public int? Age { get; set; }
         public string Gender { get; set; }
@@ -21,11 +20,7 @@ namespace Entities.Dtos
         public DateTime LastActive { get; set; }
         public string LookingFor { get; set; }
         public string Interests { get; set; }
-        public List<PhotoDto> Photos { get; set; }
 
-        public UserDto()
-        {
-            ImageUrl = "boy.jpg";
-        }
+        
     }
 }

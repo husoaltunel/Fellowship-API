@@ -1,4 +1,4 @@
-﻿using Core.Entities.Dtos;
+﻿using Business.Entities.Dtos;
 using System;
 using System.Collections.Generic;
 using System.Text;

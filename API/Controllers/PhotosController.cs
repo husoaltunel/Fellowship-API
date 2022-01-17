@@ -1,6 +1,8 @@
-﻿using Business.Managers.Photo.Commands.InsertPhoto;
-using Business.Managers.Photo.Queries.GetPhotosByUsername;
-using Business.Managers.Photo.Queries.GetProfilePhotoByUsername;
+﻿using Business.Managers.Photos.Commands.DeletePhotoById;
+using Business.Managers.Photos.Commands.InsertPhoto;
+using Business.Managers.Photos.Commands.InsertUserPhotos;
+using Business.Managers.Photos.Queries.GetPhotosByUsername;
+using Business.Managers.Photos.Queries.GetProfilePhotoByUsername;
 using MediatR;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
@@ -39,9 +41,14 @@ namespace API.Controllers
         }
 
         [HttpPost,DisableRequestSizeLimit]
-        public async Task<IActionResult> UploadAsync(List<IFormFile> files)
+        public async Task<IActionResult> UploadAsync(IFormCollection files)
         {
             return Ok(await _mediator.Send(new InsertUserPhotosCommand(){ UserId = _authController.GetUserIdFromToken(), PhotoFiles = files  }));
+        }
+        [HttpDelete("{id}")]
+        public async Task<IActionResult> DeleteByIdAsync(int id)
+        {
+            return Ok(await _mediator.Send(new DeletePhotoByIdCommand(){ Id = id ,UserId = _authController.GetUserIdFromToken() }));
         }
 
     }

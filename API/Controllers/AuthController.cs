@@ -14,13 +14,15 @@ namespace API.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    
+
     public class AuthController : ControllerBase
     {
         private readonly IMediator _mediator;
-        public AuthController(IMediator mediator)
+        private readonly IHttpContextAccessor _httpContextAccessor;
+        public AuthController(IMediator mediator, IHttpContextAccessor httpContextAccessor)
         {
             _mediator = mediator;
+            _httpContextAccessor = httpContextAccessor;
         }
 
         [HttpPost("register")]
@@ -43,10 +45,12 @@ namespace API.Controllers
             return Ok();
         }
 
+        [Authorize]
         [ApiExplorerSettings(IgnoreApi = true)]
         public string GetUserIdFromToken()
         {
-            return User.Claims.Where(claim => claim.Type == ClaimTypes.NameIdentifier).FirstOrDefault().Value.ToString();
+            return _httpContextAccessor.HttpContext.User.Claims.First(claim => claim.Type == ClaimTypes.NameIdentifier).Value;
+
         }
 
 

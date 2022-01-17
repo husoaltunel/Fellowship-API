@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace Core.Entities.Dtos
+namespace Business.Entities.Dtos
 {
     public interface IDto
     {

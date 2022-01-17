@@ -1,14 +1,13 @@
 ﻿using AutoMapper;
-using Business.Concrete;
 using Business.Constants;
-using Business.Managers.User.Queries.GetUserByUserName;
-using Core.Entities.Concrete;
-using Core.Utilities.Hashing;
-using Core.Utilities.Hashing.Abstract;
-using Core.Utilities.Results;
-using Core.Utilities.Results.Abstract;
-using Core.Utilities.Results.Concrete;
-using Core.Utilities.Security.Abstract;
+using Business.Managers.Users.Queries.GetUserByUserName;
+using Business.Entities.Concrete;
+using Business.Utilities.Hashing;
+using Business.Utilities.Hashing.Abstract;
+using Business.Utilities.Results;
+using Business.Utilities.Results.Abstract;
+using Business.Utilities.Results.Concrete;
+using Business.Utilities.Security.Abstract;
 using DataAccess.Utilities.UnitOfWork;
 using Entities.Dtos;
 using MediatR;
@@ -19,6 +18,7 @@ using System.Linq;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
+using Core.DataAccess.Concrete;
 
 namespace Business.Managers.Auth.Queries.Login
 {
@@ -42,7 +42,7 @@ namespace Business.Managers.Auth.Queries.Login
             {
                 var result = await unitOfWork.DbContext.Users.GetByFilterAsync(user => user.Username == request.Username);
                 var user = result.FirstOrDefault();
-                if (!ResultUtil<Core.Entities.Concrete.User>.IsDataExist(user))
+                if (!ResultUtil<User>.IsDataExist(user))
                 {
                     return new ErrorDataResult<LoginInfoDto>(message: AuthMessages.UserNotFound);
                 }
@@ -51,7 +51,7 @@ namespace Business.Managers.Auth.Queries.Login
                     return new ErrorDataResult<LoginInfoDto>(message: AuthMessages.InvalidPassword);
                 }
                 var mappedData = _mapper.Map<LoginInfoDto>(user);
-                mappedData.AccessToken = _tokenHelper.CreateToken(_mapper.Map<Core.Entities.Concrete.User>(user), new List<OperationClaim>());
+                mappedData.AccessToken = _tokenHelper.CreateToken(_mapper.Map<User>(user), new List<OperationClaim>());
                 return new SuccessDataResult<LoginInfoDto>(mappedData,message:AuthMessages.SuccessLogin);
             }          
 

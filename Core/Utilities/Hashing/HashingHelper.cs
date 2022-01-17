@@ -1,10 +1,10 @@
-﻿using Core.Utilities.Hashing.Abstract;
+﻿using Business.Utilities.Hashing.Abstract;
 using System;
 using System.Collections.Generic;
 using System.Security.Cryptography;
 using System.Text;
 
-namespace Core.Utilities.Hashing
+namespace Business.Utilities.Hashing
 {
     public class HashingHelper : IHashingHelper
     {
