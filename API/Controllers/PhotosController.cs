@@ -1,6 +1,7 @@
 ﻿using Business.Managers.Photos.Commands.DeletePhotoById;
 using Business.Managers.Photos.Commands.InsertPhoto;
 using Business.Managers.Photos.Commands.InsertUserPhotos;
+using Business.Managers.Photos.Commands.SetProfilePhoto;
 using Business.Managers.Photos.Queries.GetPhotosByUsername;
 using Business.Managers.Photos.Queries.GetProfilePhotoByUsername;
 using MediatR;
@@ -49,6 +50,12 @@ namespace API.Controllers
         public async Task<IActionResult> DeleteByIdAsync(int id)
         {
             return Ok(await _mediator.Send(new DeletePhotoByIdCommand(){ Id = id ,UserId = _authController.GetUserIdFromToken() }));
+        }
+
+        [HttpPut("{id}")]
+        public async Task<IActionResult> SetProfilePhotoAsync(int id)
+        {
+            return Ok(await _mediator.Send(new SetProfilePhotoCommand() { UserId = int.Parse(_authController.GetUserIdFromToken()) , PhotoId = id }));
         }
 
     }
