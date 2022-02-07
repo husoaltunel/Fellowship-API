@@ -28,7 +28,7 @@ namespace Business.Managers.Albums.Commands.InsertAlbum
         {
             using (var unitOfWork = UnitOfWorkUtil.GetUnitOfWork(Connection))
             {
-                var insertedAlbumId = await unitOfWork.DbContext.Albums.AddAsync(_mapper.Map<Album>(request));
+                var insertedAlbumId = await unitOfWork.DbContext.Albums.InsertAsync(_mapper.Map<Album>(request));
 
                 if (!ResultUtil<int>.IsDataExist(insertedAlbumId))
                 {

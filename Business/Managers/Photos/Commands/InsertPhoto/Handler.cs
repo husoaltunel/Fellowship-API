@@ -30,7 +30,7 @@ namespace Business.Managers.Photos.Commands.InsertPhoto
         {
             using (var unitOfWork = UnitOfWorkUtil.GetUnitOfWork(Connection))
             { 
-                var insertedPhotoId = await unitOfWork.DbContext.Photos.AddAsync(_mapper.Map<Photo>(request));
+                var insertedPhotoId = await unitOfWork.DbContext.Photos.InsertAsync(_mapper.Map<Photo>(request));
 
                 if (!ResultUtil<int>.IsDataExist(insertedPhotoId))
                 {

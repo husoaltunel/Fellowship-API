@@ -45,7 +45,7 @@ namespace Business.Managers.Photos.Commands.InsertUserPhotos
 
                     if (!ResultUtil<int>.IsDataExist(albumId))
                     {
-                        var insertedAlbumId = await unitOfWork.DbContext.Albums.AddAsync(new Album());
+                        var insertedAlbumId = await unitOfWork.DbContext.Albums.InsertAsync(new Album());
 
                         if (ResultUtil<int>.IsDataExist(insertedAlbumId))
                         {
@@ -61,8 +61,8 @@ namespace Business.Managers.Photos.Commands.InsertUserPhotos
                         savedPhotoUrls = await _mediator.Send(new SavePhotosToFolderCommand() { Photos = request.PhotoFiles });
                         foreach (var url in savedPhotoUrls)
                         {
-                            var insertedPhotoId = await unitOfWork.DbContext.Photos.AddAsync( new Photo(){ Url = url });
-                            await unitOfWork.DbContext.AlbumPhotos.AddAsync(new AlbumPhoto { AlbumId = albumId, PhotoId = insertedPhotoId });
+                            var insertedPhotoId = await unitOfWork.DbContext.Photos.InsertAsync( new Photo(){ Url = url });
+                            await unitOfWork.DbContext.AlbumPhotos.InsertAsync(new AlbumPhoto { AlbumId = albumId, PhotoId = insertedPhotoId });
                         }
 
                     }

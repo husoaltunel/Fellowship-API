@@ -22,7 +22,7 @@ namespace Core.DataAccess.Concrete.Dapper
             entityName = typeof(TEntity).Name;
         }
 
-        public virtual async Task<int> AddAsync(TEntity entity)
+        public virtual async Task<int> InsertAsync(TEntity entity)
         {
             return await Connection.QuerySingleAsync<int>(SqlQueryUtil<TEntity>.GenerateGenericInsertQuery(entity, entityName), entity, transaction: Transaction);
         }

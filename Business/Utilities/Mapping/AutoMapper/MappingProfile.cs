@@ -40,6 +40,7 @@ namespace Business.Utilities.Mapping.AutoMapper
             CreateMap<PhotoDto,Photo>().ReverseMap();
             CreateMap<AlbumPhotoDto,AlbumPhoto>().ReverseMap();
             CreateMap<AlbumDto,Album>().ReverseMap();
+            CreateMap<InsertUserLikeDto,UserLike>();
 
         }
     }

@@ -28,7 +28,7 @@ namespace Business.Managers.AlbumPhotos.Commands.InsertPhotoToAlbum
         {
             using (var unitOfWork = UnitOfWorkUtil.GetUnitOfWork(Connection))
             {
-                var insertedAlbumPhotoId = await unitOfWork.DbContext.AlbumPhotos.AddAsync(_mapper.Map<AlbumPhoto>(request));
+                var insertedAlbumPhotoId = await unitOfWork.DbContext.AlbumPhotos.InsertAsync(_mapper.Map<AlbumPhoto>(request));
 
                 if (!ResultUtil<int>.IsDataExist(insertedAlbumPhotoId))
                 {

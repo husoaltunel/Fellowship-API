@@ -17,7 +17,7 @@ namespace DataAccess.Concrete.Dapper.Repositories
         {
 
         }
-        public async override Task<int> AddAsync(Album album)
+        public async override Task<int> InsertAsync(Album album)
         {
             return await Connection.QuerySingleAsync<int>($@"insert into ""Albums"" default values returning ""Id"" " ,transaction: Transaction);
         }

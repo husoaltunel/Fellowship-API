@@ -21,6 +21,7 @@ namespace DataAccess.Concrete.Dapper
         public PhotoRepository Photos => new PhotoRepository(Connection, Transaction);
         public AlbumPhotoRepository AlbumPhotos => new AlbumPhotoRepository(Connection, Transaction);
         public AlbumRepository Albums => new AlbumRepository(Connection, Transaction);
+        public UserLikeRepository UserLikes => new UserLikeRepository(Connection,Transaction);
 
     }
 }

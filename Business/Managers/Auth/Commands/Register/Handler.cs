@@ -45,7 +45,7 @@ namespace Business.Managers.Auth.Commands.Register
                     PasswordSalt = _hashingHelper.GetPasswordSalt()
                 };
                 newUser = _mapper.Map(request,newUser);
-                var result = await unitOfWork.DbContext.Users.AddAsync(newUser);
+                var result = await unitOfWork.DbContext.Users.InsertAsync(newUser);
                 if (!ResultUtil<int>.IsResultSuccees(result))
                 {
                     return new ErrorDataResult<UserDto>();

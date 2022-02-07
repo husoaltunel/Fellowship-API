@@ -11,7 +11,7 @@ namespace Core.DataAccess.Abstract
         Task<TEntity> GetByIdAsync(int id);
         Task<IEnumerable<TEntity>> GetByFilterAsync(Func<TEntity, bool> filter);
         Task<IEnumerable<TEntity>> GetAllAsync();
-        Task<int> AddAsync(TEntity entity);
+        Task<int> InsertAsync(TEntity entity);
         Task<int> UpdateAsync(TEntity entity);
         Task<int> DeleteAsync(int id);
     }
